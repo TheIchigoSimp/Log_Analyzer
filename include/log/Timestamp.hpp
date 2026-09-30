@@ -1,15 +1,12 @@
 #include<chrono>
-#include<iostream>
-#include<sstream>
-#include<ctime>
-#include<iomanip>
+#include<string>
 
 class Timestamp{
 	public:
-		std::string validate_time(string time);
-		std::chrono::time_point parse_time(std::string time);
-		std::string format_time(std::std::chrono::time_point time_pt);
+		bool validate_time(std::string time);
+		std::chrono::system_clock::time_point parse_to_tm(std::string time);
+		std::string parse_to_str(std::chrono::system_clock::time_point time_pt);
 
 	private:
-		std::chrono::time_point<std::chrono::system_clock> timestamp;
+		std::chrono::system_clock::time_point timestamp;
 };
