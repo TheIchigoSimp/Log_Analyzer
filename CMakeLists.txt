@@ -4,7 +4,8 @@ project(Log_Analyzer LANGUAGES CXX)
 
 # Create logging library
 add_library(logging
-    src/log/Timestamp.cpp    
+    src/log/Timestamp.cpp
+    src/log/Severity.cpp
 )
 target_include_directories(logging
     PUBLIC
@@ -64,5 +65,24 @@ add_test(
 
 set_property(
     TEST TimestampTest
+    PROPERTY LABELS "unit"
+)
+
+add_executable(SeverityTest
+    tests/SeverityTest.cpp
+)
+target_include_directories(SeverityTest
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+target_compile_features(SeverityTest PRIVATE cxx_std_20)
+target_link_libraries(SeverityTest PRIVATE logging)
+add_test(
+    NAME SeverityTest
+    COMMAND SeverityTest
+)
+
+set_property(
+    TEST SeverityTest
     PROPERTY LABELS "unit"
 )
