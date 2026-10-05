@@ -6,6 +6,7 @@ project(Log_Analyzer LANGUAGES CXX)
 add_library(logging
     src/log/Timestamp.cpp
     src/log/Severity.cpp
+    src/log/SourceLocation.cpp
 )
 target_include_directories(logging
     PUBLIC
@@ -84,5 +85,24 @@ add_test(
 
 set_property(
     TEST SeverityTest
+    PROPERTY LABELS "unit"
+)
+
+add_executable(SourceLocationTest
+    tests/SourceLocationTest.cpp
+)
+target_include_directories(SourceLocationTest
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+target_compile_features(SourceLocationTest PRIVATE cxx_std_20)
+target_link_libraries(SourceLocationTest PRIVATE logging)
+add_test(
+    NAME SourceLocationTest
+    COMMAND SourceLocationTest
+)
+
+set_property(
+    TEST SourceLocationTest
     PROPERTY LABELS "unit"
 )
