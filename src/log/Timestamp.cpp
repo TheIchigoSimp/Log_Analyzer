@@ -59,7 +59,7 @@ bool Timestamp::validate_time(std::string time){
 
 
 
-std::chrono::system_clock::time_point Timestamp::parse_to_tm(std::string time){
+void Timestamp::parse_to_tm(std::string time){
     if (!validate_time(time))
         throw std::invalid_argument("Invalid timestamp: " + time);
 
@@ -74,18 +74,23 @@ std::chrono::system_clock::time_point Timestamp::parse_to_tm(std::string time){
 
     //Convert to time_point
     std::time_t tt = ::timegm(&tm);
-    timestamp = std::chrono::system_clock::from_time_t(tt);
-
-    return timestamp;
+    timestamp_tm = std::chrono::system_clock::from_time_t(tt);
 }
 
-std::string Timestamp::parse_to_str(std::chrono::system_clock::time_point time_pt){
+void Timestamp::parse_to_str(std::chrono::system_clock::time_point time_pt){
     const std::time_t tt = std::chrono::system_clock::to_time_t(time_pt);
     std::tm tm = {};
     gmtime_r(&tt, &tm);
 
     std::ostringstream output;
     output << std::put_time(&tm, "[%Y-%m-%d, %H:%M:%S UTC]");
-    return output.str();
+    timestamp_str = output.str();
 }
 
+std::chrono::system_clock::time_point Timestamp::get_time_tm(void){
+    return timestamp_tm;
+}
+
+std::string Timestamp::get_time_str(void){
+    return timestamp_str;
+}

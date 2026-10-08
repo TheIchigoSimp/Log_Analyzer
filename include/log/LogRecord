@@ -1,7 +1,0 @@
-#include<iostream>
-#include<chrono>
-
-class LogRecord{
-	private:
-		
-};

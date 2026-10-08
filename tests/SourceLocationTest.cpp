@@ -9,11 +9,13 @@ void test_valid_source_locations()
 {
     SourceLocation source_location;
 
-    const auto location = source_location.parse_sourceLocation("{src/main.cpp:42}");
+    source_location.parse_sourceLocation("{src/main.cpp:42}");
+    const auto location = source_location.get_sourceLoc();
     assert(location.first == "src/main.cpp");
     assert(location.second == 42);
 
-    const auto first_line = source_location.parse_sourceLocation("{app.log:1}");
+    source_location.parse_sourceLocation("{app.log:1}");
+    const auto first_line = source_location.get_sourceLoc();
     assert(first_line.first == "app.log");
     assert(first_line.second == 1);
 }

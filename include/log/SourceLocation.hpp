@@ -3,9 +3,10 @@
 
 class SourceLocation {
     public:
-        std::pair<std::string, unsigned int> parse_sourceLocation(
+        void parse_sourceLocation(
             const std::string &sourceLoc
         );
+        std::pair<std::string, unsigned int> get_sourceLoc(void);
 
     private:
         std::string Source_File;

@@ -90,6 +90,18 @@ void test_leap_year()
     ));
 }
 
+void test_parse_and_get_timestamp()
+{
+    Timestamp timestamp;
+    const std::string timestamp_text = "[2026-08-31, 11:53:40 UTC]";
+
+    timestamp.parse_to_tm(timestamp_text);
+    const auto parsed_time = timestamp.get_time_tm();
+
+    timestamp.parse_to_str(parsed_time);
+    assert(timestamp.get_time_str() == timestamp_text);
+}
+
 int main()
 {
     test_valid_timestamp();
@@ -97,6 +109,7 @@ int main()
     test_invalid_time();
     test_invalid_date();
     test_leap_year();
+    test_parse_and_get_timestamp();
 
     std::cout << "All Timestamp tests passed.\n";
 

@@ -23,7 +23,7 @@ bool validate_line_no(const std::string &line_number)
 }
 }
 
-std::pair<std::string, unsigned int> SourceLocation::parse_sourceLocation(
+void SourceLocation::parse_sourceLocation(
     const std::string &sourceLoc
 )
 {
@@ -45,5 +45,8 @@ std::pair<std::string, unsigned int> SourceLocation::parse_sourceLocation(
     }
 
     Line_No = static_cast<unsigned int>(std::stoul(line_number));
-    return {Source_File, Line_No};
+}
+
+std::pair<std::string, unsigned int> SourceLocation::get_sourceLoc(void){
+        return {Source_File, Line_No};
 }
