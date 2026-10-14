@@ -4,6 +4,10 @@ project(Log_Analyzer LANGUAGES CXX)
 
 # Create logging library
 add_library(logging
+    src/log/LogAnalyzer.cpp
+    src/log/LogParser.cpp
+    src/log/LogRecord.cpp
+    src/log/Message.cpp
     src/log/Timestamp.cpp
     src/log/Severity.cpp
     src/log/SourceLocation.cpp
@@ -30,6 +34,25 @@ target_compile_features(log_analyzer PRIVATE cxx_std_20)
 
 # Link logging library
 target_link_libraries(log_analyzer PRIVATE logging)
+
+add_executable(LogAnalyzerTest
+    tests/LogAnalyzerTest.cpp
+)
+target_include_directories(LogAnalyzerTest
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+target_compile_features(LogAnalyzerTest PRIVATE cxx_std_20)
+target_link_libraries(LogAnalyzerTest PRIVATE logging)
+add_test(
+    NAME LogAnalyzerTest
+    COMMAND LogAnalyzerTest
+)
+
+set_property(
+    TEST LogAnalyzerTest
+    PROPERTY LABELS "unit"
+)
 
 # Tests
 include(CTest)
@@ -104,5 +127,43 @@ add_test(
 
 set_property(
     TEST SourceLocationTest
+    PROPERTY LABELS "unit"
+)
+
+add_executable(LogRecordTest
+    tests/LogRecordTest.cpp
+)
+target_include_directories(LogRecordTest
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+target_compile_features(LogRecordTest PRIVATE cxx_std_20)
+target_link_libraries(LogRecordTest PRIVATE logging)
+add_test(
+    NAME LogRecordTest
+    COMMAND LogRecordTest
+)
+
+set_property(
+    TEST LogRecordTest
+    PROPERTY LABELS "unit"
+)
+
+add_executable(LogParserTest
+    tests/LogParserTest.cpp
+)
+target_include_directories(LogParserTest
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+target_compile_features(LogParserTest PRIVATE cxx_std_20)
+target_link_libraries(LogParserTest PRIVATE logging)
+add_test(
+    NAME LogParserTest
+    COMMAND LogParserTest
+)
+
+set_property(
+    TEST LogParserTest
     PROPERTY LABELS "unit"
 )

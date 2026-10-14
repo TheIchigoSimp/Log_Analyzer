@@ -1,12 +1,8 @@
-#include<log/Timestamp.hpp>
-#include<log/SourceLocation.hpp>
-#include<log/Severity.hpp>
-#include<log/Message.hpp>
-#include<log/LogRecord.hpp>
+#include <string>
+
+#include <log/LogRecord.hpp>
 
 class LogParser{
     public:
-        LogRecord parse_record(std::string log_line){
-            
-        }
+    LogRecord parse_record(const std::string &log_line);
 };

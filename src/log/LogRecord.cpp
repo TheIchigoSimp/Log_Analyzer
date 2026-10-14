@@ -17,5 +17,5 @@ Severity::Severity_Levels LogRecord::get_severity_level(void){
 }
 
 std::string LogRecord::get_message(void){
-    message.get_logMessage();
+    return message.get_logMessage();
 }

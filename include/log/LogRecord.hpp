@@ -1,5 +1,6 @@
 #include<chrono>
 #include<string>
+#include<utility>
 
 #include<log/Timestamp.hpp>
 #include<log/SourceLocation.hpp>
